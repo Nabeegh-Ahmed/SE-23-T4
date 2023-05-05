@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import ExcelUploadButton from "../functionalities/uploadExelFile";
+import { uploadTeacherPreferences } from "../Api/teacherRequests";
+
 
 function Teacher() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [courses, setCourses] = useState([]);
-  const [unavailableSlots, setUnavailableSlots] = useState([]);
 
   const handleCourseChange = (e, index) => {
     const { name, value } = e.target;
@@ -28,14 +29,15 @@ function Teacher() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, number, email, courses, unavailableSlots });
+    console.log({ name, number, email, courses });
+    uploadTeacherPreferences({ name, number, email, courses })
   };
 
   return (
     <Container>
       <div className="d-flex justify-content-end my-5">
         <Form.Group controlId="fileUpload">
-          <ExcelUploadButton />
+          <ExcelUploadButton type={"Teachers"} />
         </Form.Group>
       </div>
       <h1>Teacher Input Form</h1>

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { uploadTeacherExcelFile } from "../../Api/teacherRequests";
+import { uploadLabExcelFile } from "../../Api/labInstructorRequests";
 
-function ExcelUploadButton() {
+
+function ExcelUploadButton({type}) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
 
+
   const handleUploadClick = () => {
-    // do something with the selected file, such as upload it to a server
-    console.log(selectedFile);
+    { type === "Teachers" && uploadTeacherExcelFile(selectedFile)}
+    { type === "LabInstructors" && uploadLabExcelFile(selectedFile)}
   };
 
   return (
