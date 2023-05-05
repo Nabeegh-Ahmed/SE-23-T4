@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import ExcelUploadButton from "../functionalities/uploadExelFile";
+import { uploadLabPreferences } from "../Api/labInstructorRequests";
 
 function LabInstructor() {
   const [name, setName] = useState("");
@@ -9,7 +10,6 @@ function LabInstructor() {
   const [labs, setLabs] = useState([
     { labName: "", preferredSlots: "", grade: "", cgpa: "", university: "" },
   ]);
-  const [availableSlots, setAvailableSlots] = useState([]);
 
   const handleCourseChange = (e, index) => {
     const { name, value } = e.target;
@@ -33,14 +33,15 @@ function LabInstructor() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, number, email, labs, availableSlots });
+    console.log({ name, number, email, labs });
+    uploadLabPreferences({ name, number, email, labs })
   };
 
   return (
     <Container>
       <div className="d-flex justify-content-end my-5">
         <Form.Group controlId="fileUpload">
-          <ExcelUploadButton />
+          <ExcelUploadButton type={"LabInstructors"}/>
         </Form.Group>
       </div>
       <h1>Lab Instructor Input Form</h1>
