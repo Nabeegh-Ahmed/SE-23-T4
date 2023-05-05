@@ -1,7 +1,7 @@
 from flask import Flask,request
 import sys
 import mongodb
-sys.path.append('./Serer/IPM')  #for importing module from IPM directory
+sys.path.append('./IPM')  #for importing module from IPM directory
 
 from process_data import process_preferences #custom function
 
