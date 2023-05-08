@@ -24,7 +24,7 @@ export function uploadTeacherExcelFile(selectedFile) {
         const rows = XLSX.utils.sheet_to_json(worksheet);
         console.log(rows)
     
-        axios.post('http://127.0.0.1:5000/uploadTeachersPreferences', {rows:rows}, {
+        axios.post('http://127.0.0.1:5000/uploadTeachersPreferences', rows, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': '*/*'
