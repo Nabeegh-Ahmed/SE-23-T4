@@ -131,19 +131,19 @@ function LabInstructor() {
               />
             </Form.Group>
 
-            <Form.Group controlId={`nonPreferredSlots-${index}`}>
+            <Form.Group controlId={`preferredSlots-${index}`}>
               <Form.Label>Preferred Slots</Form.Label>
               <Form.Control
                 as="select"
-                placeholder="Select non-preferred slots"
-                name="nonPreferredSlots"
-                value={course.nonPreferredSlots}
+                placeholder="Select preferred slots"
+                name="preferredSlots"
+                value={course.preferredSlots}
                 onChange={(e) => handleCourseChange(e, index)}
                 required
               >
                 <option value="">Select</option>
-                <option value="8:30-11.30">8:30 AM - 11:30 AM</option>
-                <option value="11.30-2:30">11:30 AM - 2:30 PM</option>
+                <option value="8:30-11:30">8:30 AM - 11:30 AM</option>
+                <option value="11:30-2:30">11:30 AM - 2:30 PM</option>
                 <option value="2:30-5:30">2:30 PM - 5:30 PM</option>
               </Form.Control>
               <Button
