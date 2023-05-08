@@ -16,6 +16,7 @@ def readTeachersPreferences():
     if (content_type == 'application/json'):
         preferences = request.get_json()
         processed_data = process_teachers_preferences(preferences)
+        mongodb.store_preferences(processed_data, 'teachers_preferences')
         print(processed_data)
         return "Preferences Received"
     else:
@@ -27,6 +28,7 @@ def readLabInstructorsPreferences():
     if (content_type == 'application/json'):
         preferences = request.get_json()
         processed_data = process_labinstructors_preferences(preferences)
+        mongodb.store_preferences(processed_data, 'lab_instructors_preferences')
         print(processed_data)
         return "Preferences Received"
     else:
