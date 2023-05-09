@@ -1,0 +1,57 @@
+/* Center the TimetableButtons component */
+.TimetableButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  /* Style the buttons */
+  .TimetableButtons button {
+    margin: 0.5rem;
+  }
+  
+  /* Style the clashes section */
+  .TimetableButtons h3 {
+    margin-top: 1rem;
+  }
+  
+  .TimetableButtons p {
+    margin: 0.5rem;
+  }
+  
+  .TimetableButtons p:before {
+    content: "⚠️";
+    margin-right: 0.5rem;
+  }
+  
+  /* Style the table */
+  .TimetableTable {
+    margin-top: 2rem;
+  }
+  
+  .TimetableTable table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .TimetableTable th,
+  .TimetableTable td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .TimetableTable th {
+    background-color: #eee;
+  }
+  
+  .TimetableTable td:first-child {
+    font-weight: bold;
+  }
+  
+  .TimetableTable td:nth-child(2),
+  .TimetableTable td:nth-child(3) {
+    width: 20%;
+  }
+  
