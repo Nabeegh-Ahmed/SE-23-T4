@@ -1,38 +1,102 @@
-.App {
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  background-image: url("https://sheratokens.com/wp-content/uploads/2023/03/Writer-Facebook-Post-1.png");
+  position: relative;
+  left: 10rem;
+  top: 6rem;
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 13px;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@media (min-width: 600px) {
+  .Hamburger {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .App {
+    left: -26px!important;
+    top: 109px!important;
+  }
+  .fetchmessages,
+  .NewChat {
+    display: none;
+  }
+
+  .fetchmessagesForMob,
+  .NewChatForMob {
+    display: block;
+    z-index: 32!important;
+    background: black!important;
+  }
+  .fetchmessagesForMob {
+    width: 100%;
+    left: 2px!important;
+    top: 257px!important;
+  }
+  .NewChatForMob{
+    width: 100%!important;
+    left: 2px!important;
+    top: 181px!important;
+  }
+
+  .NewChatForMob .user{
+    margin-right: 10px!important;
+    margin-top: 4px!important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .App .Chat_Container {
+    width: 115% !important;
+    height: 75vh !important;
+  }
+  .Hamburger {
+    position: absolute;
+    top: 110px;
+    left: 42%;
+    width: 52px;
+  }
+}
+a{
+  color: white!important;
 }
