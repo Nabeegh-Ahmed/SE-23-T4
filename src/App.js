@@ -21,27 +21,37 @@ function Clashes() {
 
     return (
         <div>
-            <h2>Clashes</h2>
-            <div>
-                <label htmlFor="clash-select">Select a clash to resolve:</label>
-                <select id="clash-select" value={selectedClash ? selectedClash.decription : ''} onChange={e => setSelectedClash(clashes.find(clash => clash.decription === e.target.value))}>
-                    <option value="">-- Select a clash --</option>
-                    {clashes.map(clash => (
-                        <option key={clash.decription} value={clash.decription}>{clash.decription}</option>
-                    ))}
-                </select>
-                <button disabled={!selectedClash} onClick={handleResolveClash}>Resolve clash</button>
-            </div>
+
+
             {clashes.length > 0 ? (
                 <div>
-                    <h3>Unresolved clashes:</h3>
+                    <h3>Clashes:</h3>
                     {clashes.map(clash => (
                         <div key={clash.decription}>
+                            <p>------------------------------------------------------------------------------------------------------------</p>
                             <p>Type: {clash.type}</p>
                             <p>Description: {clash.decription}</p>
                             <p>Slots: {clash.slots}</p>
                             <p>Course: {clash.course}</p>
                             <p>Instructor: {clash.instructor}</p>
+                            {clash.resolution ? (
+                                <p>Resolution: {clash.resolution}</p>
+                            ) : (
+                                <div>
+                                    <p>Status: Unresolved</p>
+                                    <button
+                                        onClick={() => {
+                                            const newClashes = [...clashes];
+                                            const index = newClashes.indexOf(clash);
+                                            newClashes[index].resolution = 'Resolved';
+                                            setClashes(newClashes);
+                                        }}
+                                    >
+                                        Mark as resolved
+                                    </button>
+                                </div>
+                            )}
+
                         </div>
                     ))}
                 </div>

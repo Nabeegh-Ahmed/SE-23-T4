@@ -144,7 +144,22 @@ result=tt.Timetable.insert_many([
     }
     ])
 
-
+TIMESLOTS= {
+    'Monday': [],
+    'Tuesday': [],
+    'Wednesday': [],
+    'Thursday': [],
+    'Friday': [],
+    'Saturday': []
+}
+cursor=tt.Timetable.find({})
+for d in cursor:
+    day=d['day']
+    ts=d['timeslot']
+    TIMESLOTS[day].append(ts)
+for day in TIMESLOTS:
+    print(day, TIMESLOTS[day])
+print(TIMESLOTS)
 clashes=[] #list of clashes
 classes=tt.Timetable.find({})
 pref=db.preferences.find({})
@@ -161,14 +176,15 @@ for pref in pref:   # loop through all preferences
         course=class_["course"]
         timeslot=class_["timeslot"]
         section=class_["section"]
+        day=class_['day']
 
         #checking for non preferred timeslot
         if timeslot in nptime:
-            clash={'type': 'Non-preferred Timeslot','slots':timeslot,'course': course,'instructor': instructor, 'decription':f"{instructor} has been assigned non-preferred timeslot: {timeslot} for {course} course for section {section} on {class_['day']}" }
+            clash={'type': 'Non-preferred Timeslot','day': day, 'slots':timeslot,'course': course,'instructor': instructor, 'decription':f"{instructor} has been assigned non-preferred timeslot: {timeslot} for {course} course for section {section} on {class_['day']}" }
             clashes.append(clash)
         #checking for non preferred course
         if course not in icourses:
-            clash = {'type': 'Non-preferred Course', 'slots':timeslot,'course': course,'instructor': instructor, 'decription': f"{instructor} has been assigned non-preferred course: {course} for section {section} on {class_['day']} at timeslot: {timeslot}"}
+            clash = {'type': 'Non-preferred Course','day': day, 'slots':timeslot,'course': course,'instructor': instructor, 'decription': f"{instructor} has been assigned non-preferred course: {course} for section {section} on {class_['day']} at timeslot: {timeslot}"}
             clashes.append(clash)
 
 for c in clashes:
@@ -221,6 +237,38 @@ for class_ in classes:#checking for classes for other sections and courses with 
 
 for c in clashes:
    print(c)
+
+
+#resolving clashes
+
+for clash in clashes:
+    if clash['type']=='Non-preferred Timeslot':
+        #looking for different time-slot
+        instructor=clash['instructor']
+        course = clash['course']
+        day = clash['day']
+        nptime = clash['slots']
+
+        #find availability
+        ts_available=[t for t in TIMESLOTS[day] if t not in nptime]
+
+        #make sure new timeslot doesn't clash with exisitng
+        clashF=True
+        for ts in ts_available:
+            class_clash=list(tt.Timetable.find({'day':day, 'timeslot':ts}))
+            for cl in class_clash:
+                if cl['instructor']==instructor:
+                    clashF=True
+                    break
+                else:
+                    clashF=False
+            if not clashF:
+                resolve= input(f"Do you want to resolve clash type {clash['type']} for {instructor} at time: {nptime} and day {day} for course {course} ")
+                if resolve=='yes':
+                    tt.Timetable.update_one(
+                        {'day': day, 'timeslot': clash['slots'], 'course': course, 'section': section},
+                        {'$set': {'timeslot': ts}}
+                    )
 
 
 
