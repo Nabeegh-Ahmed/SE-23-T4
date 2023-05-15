@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Timetable</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="import.js"></script>
+</head>
+<body>
+  <h1>Timetable</h1>
+  <form>
+    <label for="file">Select a file:</label>
+    <input type="file" id="file" name="file">
+    <button type="button" onclick="handleFileUpload()">Upload</button>
+  </form>
+  <button type="button" onclick="handleFileDownload()">Download Timetable</button>
+  <table id="timetable">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Section</th>
+        <th>Venue</th>
+        <th>Time</th>
+        <th>Day</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script>loadTimetable();</script>
+</body>
+</html>

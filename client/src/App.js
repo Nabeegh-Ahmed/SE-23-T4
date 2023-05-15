@@ -1,18 +1,14 @@
-import "./App.css";
-import SheraAI from "./pages/SheraAI.js";
-import ImageGenator from "./pages/ImageGenator.js";
-import { Header } from "./components/Header.js";
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import Buttons from './Buttons';
+import Import from './Import';
 
 function App() {
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<SheraAI />} exact />
-        <Route path="/CSVTable" element={<ImageGenator />} exact />
-      </Routes>
-    </>
+    <div className="App">
+      <h1>Timetable App</h1>
+      <Buttons />
+      <Import />
+    </div>
   );
 }
 
