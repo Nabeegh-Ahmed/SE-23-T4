@@ -1,1 +1,91 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CLAM App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>CLAM App</h1>
+    <button id="inputDataBtn">Submit Data</button>
+    <button id="assignCoursesBtn">Assign Courses</button>
+    <button id="allocateLabsBtn">Allocate Labs</button>
+    <button id="allocateVenuesBtn">Allocate Venues</button>
+
+    <script>
+        $(document).ready(function() {
+            // Function to send the input data
+            $('#inputDataBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/clam/input',
+                    success: function(response) {
+                        alert('Data received.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert('Error receiving data.');
+                    }
+                });
+            });
+
+            // Function to assign courses to instructors
+            $('#assignCoursesBtn').click(function() {
+                var instructorName = prompt('Enter instructor name:');
+
+                if (instructorName) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/clam/assign_courses',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ 'instructor_name': instructorName }),
+                        success: function(response) {
+                            alert(response.message);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            alert('Error assigning courses.');
+                        }
+                    });
+                }
+            });
+
+            // Function to allocate labs to instructors
+            $('#allocateLabsBtn').click(function() {
+                var instructorName = prompt('Enter instructor name:');
+
+                if (instructorName) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/clam/allocate_labs',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ 'instructor_name': instructorName }),
+                        success: function(response) {
+                            alert(response.message);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            alert('Error allocating labs.');
+                        }
+                    });
+                }
+            });
+
+            // Function to allocate venues for courses and labs
+            $('#allocateVenuesBtn').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/clam/allocate_venues',
+                    success: function(response) {
+                        alert(response.message);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert('Error allocating venues.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
